@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {BannerAnimation} from "../components";
 
 const NickName = styled(({className}) =>
-    <img src="/blog/static/images/nickName.png" alt="" className={className}/>
+    <img src="/blog/static/images/nickName-fff.png" alt="" className={className}/>
 )`
 position: absolute;
 top: 30px;
