@@ -1,0 +1,80 @@
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #bcbcbc;
+}
+
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+
+html, body {
+    font: 16px ColfaxWeb, PingFangSC-Regular, Microsoft YaHei;
+    /*min-width: 1280px;*/
+    background: #F5F5F5;
+    -webkit-font-smoothing: antialiased;
+    word-wrap: break-word;
+}
+
+html {
+    min-height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, p, dl, dd, dt, ul, ol, li, body, pre, u {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, i, em, b, u {
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+}
+
+ul, ol, dl, dd, dt {
+    list-style: none;
+}
+
+input, button, textarea {
+    font-family: PingFangSC-Regular, Microsoft YaHei;
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    resize: none;
+    border: 0;
+    background: transparent;
+}
+
+input::placeholder, button::placeholder, textarea::placeholder {
+    color: #C2C2C2;
+}
+
+input[type] {
+    margin: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+img, canvas, svg {
+    vertical-align: top;
+
+}
