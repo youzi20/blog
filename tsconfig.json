@@ -7,9 +7,8 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "declaration": true,
+    "declarationDir": "./types",
     "experimentalDecorators": true,
-
-
     "module": "esnext",
     // 编译出的代码采用的模块规范
     "target": "es5",
