@@ -97,11 +97,18 @@ const App = styled(({className}) => {
         .github {
             width: 24px;
             margin-right: 8px;
-
+            border-radius: 50%;
+            border: 2px solid #fff;
+            overflow: hidden;
+            transition: all .3s ease;
+            
+            &:hover {
+                border-color: #000;
+            }
+            
             img {
+                display: block;
                 width: 100%;
-                border-radius: 50%;
-                border: 2px solid #fff;
             }
         }
     }
