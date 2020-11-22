@@ -1,2 +1,3 @@
 import useWindowZoom from "./useWindowZoom";
-export { useWindowZoom };
+import useSwiper from "./useSwiper";
+export { useWindowZoom, useSwiper };

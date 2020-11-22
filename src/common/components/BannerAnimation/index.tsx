@@ -1,7 +1,5 @@
-import React, {useState} from "react";
-import styled from "styled-components";
-
-import {useWindowZoom} from '../../hooks';
+import React, {useState} from 'react';
+import styled from 'styled-components';
 
 const bgs = [1, 2, 3, 4, 5];
 
@@ -23,51 +21,45 @@ const caleItemPosition = () => {
     return itemStyle;
 };
 
-const BannerAnimation: React.FC<any> = styled(({className, children}) => {
-    const {width: windowWidth, height: windowHeight} = useWindowZoom();
+const BannerAnimation: React.FC<{ width: number, height: number }> = styled(({className, children, width, height}) => {
     const [index, setIndex] = useState(Math.floor(bgs.length * Math.random()));
     const [styles] = useState(caleItemPosition());
 
-    return <div className={className} style={{width: windowWidth, height: windowHeight}}>
-        {bgs.map((item, ind) => {
-            const {size, top, left, background} = styles[ind];
+    return <div className={className} style={{height}}>
+        <div className="content" style={{width, height}}>
+            {bgs.map((item, ind) => {
+                const {size, top, left, background} = styles[ind];
 
+                const itemStyle = {
+                    background,
+                    clipPath: `circle(${size / 2}px at ${left}% ${top}%)`,
+                };
 
-            const itemStyle = {
-                background,
-                clipPath: `circle(${size / 2}px at ${left}% ${top}%)`,
-            };
+                const borderSize = size + 16;
 
-            const borderSize = size + 16;
+                const itemBorderStyle = {
+                    top: `calc(${top}% - ${borderSize / 2}px)`,
+                    left: `calc(${left}% - ${borderSize / 2}px)`,
+                    width: borderSize,
+                    height: borderSize,
+                };
 
-            const itemBorderStyle = {
-                top: `calc(${top}% - ${borderSize / 2}px)`,
-                left: `calc(${left}% - ${borderSize / 2}px)`,
-                width: borderSize,
-                height: borderSize,
-            };
-
-            return <div
-                className={"item " + (ind === index ? "active" : "")}
-            >
-                <div className="item-img" style={itemStyle}/>
-                <div className="item-border" style={itemBorderStyle} onClick={() => setIndex(ind)}/>
-
-                {/*<div>*/}
-                {/*    <img key={item} src={``} alt=""/>*/}
-                {/*</div>*/}
-
-                {/*<div style={{display: "none"}}>*/}
-                {/*    <img key={item} src={`/blog/static/images/bg${item}.jpg`} alt=""/>*/}
-                {/*</div>*/}
-            </div>
-        })}
+                return <div className={"item " + (ind === index ? "active" : "")}>
+                    <div className="item-img" style={itemStyle}/>
+                    <div className="item-border" style={itemBorderStyle} onClick={() => setIndex(ind)}/>
+                </div>
+            })}
+        </div>
         {children}
     </div>
 })`
-position: absolute;
-left: 0;
-height: 0;
+position: relative;
+
+.content {
+    position: absolute;
+    left: 0;
+    height: 0;
+}
 
 .item {
     .item-img {

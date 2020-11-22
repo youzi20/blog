@@ -1,11 +1,12 @@
 import {useEffect, useState} from 'react';
 
 const useWindowZoom = (): { width: number, height: number, refresh: () => void } => {
+    const [body] = useState(document.getElementsByTagName("body")[0])
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
 
     const refresh = () => {
-        setWidth(window.innerWidth);
+        setWidth(body.clientWidth);
         setHeight(window.innerHeight);
     }
 
@@ -13,7 +14,6 @@ const useWindowZoom = (): { width: number, height: number, refresh: () => void }
         refresh();
 
         window.addEventListener("resize", refresh);
-
     }, []);
 
     return {

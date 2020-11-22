@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'KangKangTi';
+    src: url('../font/KangKangTi.ttf')
+}
+
 ::-webkit-scrollbar {
     width: 4px;
     height: 4px;
@@ -76,5 +81,4 @@ a {
 
 img, canvas, svg {
     vertical-align: top;
-
 }
