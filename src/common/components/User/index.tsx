@@ -27,7 +27,7 @@ img {
     width: 24px;
     margin-right: 5px;
     border-radius: 50%;
-    border: 2px solid #ededed;
+    border: 2px solid #fff;
 }
 
 a:hover {

@@ -95,11 +95,13 @@ const App = styled(({className}) => {
         background: #efefef;
         
         .github {
-            width: 22px;
-            margin-right: 5px;
-            
+            width: 24px;
+            margin-right: 8px;
+
             img {
                 width: 100%;
+                border-radius: 50%;
+                border: 2px solid #fff;
             }
         }
     }
