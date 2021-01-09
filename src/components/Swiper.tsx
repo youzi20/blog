@@ -1,14 +1,14 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import styled from 'styled-components';
 
-import {Swiper as DomSwiper} from '../../js';
+import { Swiper as SwiperJS } from '../js';
 
-const Swiper = styled(({className}) => {
+export const Swiper = styled(({ className }) => {
     const swiperRef = useRef(null);
 
     useEffect(() => {
         if (swiperRef.current) {
-            new DomSwiper({
+            new SwiperJS({
                 el: swiperRef.current,
                 pagination: true,
                 delay: 2000
@@ -106,5 +106,3 @@ const Swiper = styled(({className}) => {
     }
 }
 `;
-
-export default Swiper;

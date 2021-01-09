@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "npx webpack --mode=development --watch"
   },
   "dependencies": {
     "@babel/core": "^7.12.3",
@@ -12,14 +12,25 @@
     "@types/react": "^16.14.0",
     "@types/react-dom": "^16.9.9",
     "babel-loader": "^8.2.1",
+    "highlight.js": "^10.5.0",
+    "moment": "^2.29.1",
+    "monaco-editor": "^0.21.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "require": "^2.4.20",
     "styled-components": "^5.2.1",
+    "url-loader": "^4.1.1",
     "webpack-watched-glob-entries-plugin": "^2.1.7"
   },
   "devDependencies": {
-    "awesome-typescript-loader": "^3.5.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "css-loader": "^5.0.1",
+    "node-sass": "^4.14.1",
+    "sass": "^1.32.0",
+    "sass-loader": "^7.3.1",
+    "style-loader": "^2.0.0",
     "typescript": "^2.9.2",
-    "webpack": "^3.12.0"
+    "webpack": "^4.41.2",
+    "webpack-cli": "^4.3.1"
   }
 }

@@ -1,8 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 
-
-const Header: React.FC<{ height: number }> = styled(({className, height}) => {
+export const Header: React.FC<{ height: number }> = styled(({className, height}) => {
     const [status, setStatus] = useState<'hide' | 'show'>("hide");
     const [scale, setScale] = useState(1);
     const heightRef = useRef(height);
@@ -94,6 +93,3 @@ transition: all .3s ease;
 }
 
 `;
-
-
-export default Header;

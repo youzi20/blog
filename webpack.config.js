@@ -8,15 +8,8 @@ module.exports = {
     entry: WebpackWatchedGlobEntries.getEntries(
         [
             // Your path(s)
-            path.resolve(__dirname, './src/**/index.[j|t]sx'),
+            path.resolve(__dirname, './src/page/*/index.[j|t]sx'),
         ],
-        {
-            // Optional glob options that are passed to glob.sync()
-            ignore: [
-                path.resolve(__dirname, './src/components/**'),
-                path.resolve(__dirname, './src/hooks/**')
-            ]
-        }
     ),
     plugins: [
         new WebpackWatchedGlobEntries(),
@@ -31,10 +24,14 @@ module.exports = {
     },
     resolve: {
         // 先尝试 ts，tsx 后缀的 TypeScript 源码文件
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
     },
     module: {
         rules: [
+            {
+                test: /\.scss|sass|css$/,
+                use: ["style-loader", "css-loader", "sass-loader",],
+            },
             {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader'
@@ -48,6 +45,17 @@ module.exports = {
                     }
                 },
                 exclude: /node_modules/
+            },
+            {
+                test: /\.(png|jpg|gif|jpe?g|svg)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 2048,
+                        name: '[name].[ext]',
+                        outputPath: 'images/'
+                    }
+                }
             }
         ]
     },

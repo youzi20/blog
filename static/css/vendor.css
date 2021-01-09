@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'KangKangTi';
-    src: url('../font/KangKangTi.ttf')
+    font-family: "KangKangTi";
+    src: url("../font/KangKangTi.ttf");
 }
 
 ::-webkit-scrollbar {
@@ -15,14 +15,15 @@
     background-color: #bcbcbc;
 }
 
-*, *:after, *:before {
+*,
+*:after,
+*:before {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     font: 16px ColfaxWeb, PingFangSC-Regular, Microsoft YaHei;
-    /*min-width: 1280px;*/
-    background: #F5F5F5;
     -webkit-font-smoothing: antialiased;
     word-wrap: break-word;
 }
@@ -31,23 +32,53 @@ html {
     min-height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6, p, dl, dd, dt, ul, ol, li, body, pre, u {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dd,
+dt,
+ul,
+ol,
+li,
+body,
+pre,
+u {
     margin: 0;
     padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6, i, em, b, u {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+i,
+em,
+b,
+u {
     font-size: inherit;
     font-style: inherit;
     font-weight: inherit;
     text-decoration: none;
 }
 
-ul, ol, dl, dd, dt {
+ul,
+ol,
+dl,
+dd,
+dt {
     list-style: none;
 }
 
-input, button, textarea {
+input,
+button,
+textarea {
     font-family: PingFangSC-Regular, Microsoft YaHei;
     padding: 0;
     margin: 0;
@@ -57,8 +88,10 @@ input, button, textarea {
     background: transparent;
 }
 
-input::placeholder, button::placeholder, textarea::placeholder {
-    color: #C2C2C2;
+input::placeholder,
+button::placeholder,
+textarea::placeholder {
+    color: #c2c2c2;
 }
 
 input[type] {
@@ -75,10 +108,12 @@ input[type="number"] {
 }
 
 a {
-    color: #333;
+    color: inherit;
     text-decoration: none;
 }
 
-img, canvas, svg {
+img,
+canvas,
+svg {
     vertical-align: top;
 }

@@ -15,13 +15,13 @@ const caleItemPosition = () => {
         const itemLeft = itemWidth * ind + 10;
         const left = Math.ceil(itemLeft + itemWidth / 2 * Math.random());
 
-        itemStyle.push({size, top, left, background: `url(/blog/static/images/bg${item}.jpg) center / cover no-repeat`});
+        itemStyle.push({size, top, left, background: `url(../static/images/bg${item}.jpg) center / cover no-repeat`});
     });
 
     return itemStyle;
 };
 
-const BannerAnimation: React.FC<{ width: number, height: number }> = styled(({className, children, width, height}) => {
+export const BannerAnimation: React.FC<{ width: number, height: number }> = styled(({className, children, width, height}) => {
     const [index, setIndex] = useState(Math.floor(bgs.length * Math.random()));
     const [styles] = useState(caleItemPosition());
 
@@ -44,7 +44,7 @@ const BannerAnimation: React.FC<{ width: number, height: number }> = styled(({cl
                     height: borderSize,
                 };
 
-                return <div className={"item " + (ind === index ? "active" : "")}>
+                return <div key={item} className={"item " + (ind === index ? "active" : "")}>
                     <div className="item-img" style={itemStyle}/>
                     <div className="item-border" style={itemBorderStyle} onClick={() => setIndex(ind)}/>
                 </div>
@@ -115,33 +115,3 @@ position: relative;
     }
 }
 `;
-
-export default BannerAnimation;
-
-// ${() => {
-//   let style = '';
-//   itemStyle.forEach((item, ind) => {
-//       const {size, top, left, background} = item;
-// const borderSize = size + 16;
-//
-// console.log("style");
-//
-// style += `
-//             &:nth-child(${ind + 1}) {
-//                 .item-img {
-//                     background: ${background};
-//                     clip-path: circle(${size / 2}px at ${left}% ${top}%);
-//                 }
-//
-//                 .item-border {
-//                     top: calc(${top}% - ${borderSize / 2}px);
-//                     left: calc(${left}% - ${borderSize / 2}px);
-//                     width: ${borderSize}px;
-//                     height: ${borderSize}px;
-//                 }
-//             }
-//             `
-// });
-//
-// return style;
-// }}
