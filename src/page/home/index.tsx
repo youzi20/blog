@@ -1,15 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
-import { Container, Footer, Icon, Timer, User, UserInfo, Swiper } from '../../components';
+import { Common, Container, ContentList, UserMessage, Footer } from '../../components';
+
+import { Request } from "../../utils/fetch";
+import { MenuTypes } from '../../types';
+
 
 const App = styled(({ className }) => {
-    return <div className={className}>
-        <Container width="880px">
-            <UserInfo />
+    const [dataSource, setDataSource] = useState(null);
+    const [menu, setMenu] = useState(MenuTypes.NEWS);
 
-            <div style={{ height: 1000 }}>
+    const queryNewsList = async () => {
+        const data = await Request("/api/news/queryNewsList.json", {
+            body: {
+                menuType: menu
+            }
+        });
+
+        setDataSource(data);
+    }
+
+    useEffect(() => {
+        queryNewsList();
+    }, [menu]);
+
+    return <div className={className}>
+        <Common menu={menu} onChangeMenu={setMenu} />
+
+        <Container w={780}>
+
+            {MenuTypes.MESSAGE === menu ?
+                <UserMessage /> :
+                <ContentList dataSource={dataSource} />
+            }
+
+
+            {/* <div>
                 <div className="news">
                     <div className="tag">
                         <span>JavaScript</span>
@@ -31,13 +59,18 @@ const App = styled(({ className }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </Container>
 
 
         <Footer />
     </div>
 })`
+&:after {
+    content:"";
+    background: linear-gradient(90deg, #ffbe0b, #fb5607, #ff006e, #8338ec, #3a86ff);
+}
+
 .news {
     position: relative;
     border-radius: 4px;

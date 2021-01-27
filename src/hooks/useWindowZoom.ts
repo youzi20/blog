@@ -1,6 +1,13 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
-const useWindowZoom = (): { width: number, height: number, refresh: () => void } => {
+
+interface WindowZoom {
+    width: number
+    height: number
+    refresh: () => void
+}
+
+export const useWindowZoom: () => WindowZoom = () => {
     const [body] = useState(document.getElementsByTagName("body")[0])
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -22,5 +29,3 @@ const useWindowZoom = (): { width: number, height: number, refresh: () => void }
         refresh
     }
 }
-
-export default useWindowZoom;

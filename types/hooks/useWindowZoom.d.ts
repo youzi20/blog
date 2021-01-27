@@ -1,6 +1,7 @@
-declare const useWindowZoom: () => {
+interface WindowZoom {
     width: number;
     height: number;
     refresh: () => void;
-};
-export default useWindowZoom;
+}
+export declare const useWindowZoom: () => WindowZoom;
+export {};

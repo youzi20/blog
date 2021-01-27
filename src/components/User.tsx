@@ -21,8 +21,8 @@ export const User: React.FC<{ name: string }> = styled(({ className, name }) => 
     </span>
 })`
 height: 24px;
-font-size: 12px;
-color: #666;
+font-size: inherit;
+color: inherit;
 
 a {
     display: flex;

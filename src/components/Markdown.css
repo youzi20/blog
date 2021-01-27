@@ -1,10 +1,11 @@
 .markdown-body {
+  font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial;
   word-break: break-word;
   line-height: 1.75;
   font-weight: 400;
   font-size: 15px;
-  overflow-x: hidden;
   color: #333;
+  width: 100%;
 }
 
 .markdown-body h1,
@@ -88,6 +89,8 @@
   overflow: auto;
   position: relative;
   line-height: 1.75;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .markdown-body pre > code {
@@ -103,8 +106,7 @@
 
 .markdown-body a {
   text-decoration: none;
-  color: #0269c8;
-  border-bottom: 1px solid #d1e9ff;
+  color: #005cc5;
 }
 
 .markdown-body a:active,
@@ -166,7 +168,7 @@
 .markdown-body ol li,
 .markdown-body ul li {
   margin-bottom: 0;
-  list-style: inherit;
+  list-style: disc;
 }
 
 .markdown-body ol li .task-list-item,

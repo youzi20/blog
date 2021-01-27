@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
+import moment from '../utils/moment';
 
 interface TimerProps {
     timer: string | number
@@ -8,10 +8,11 @@ interface TimerProps {
 }
 
 export const Timer: React.FC<TimerProps> = styled(({ className, timer, format }) => {
+
     return <span className={"youzi-timer " + className}>
         {format && moment(timer).format(format)}
     </span>
 })`
-font-size: 12px;
-color: #666;
+font-size: inherit;
+color: inherit;
 `;

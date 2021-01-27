@@ -1,5 +1,2 @@
-import useWindowZoom from "./useWindowZoom";
-
-export {
-    useWindowZoom,
-}
+export * from "./useWindowZoom";
+export * from "./usePortal";

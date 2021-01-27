@@ -10,7 +10,7 @@ const { title, contentHTML, createTimer, updateTimer } = dataSource || {};
 
 const App = styled(({ className }) => {
     return <div className={className}>
-        <Container width="880px">
+        <Container w="880px">
             <UserInfo />
 
             <div className="news-content">
@@ -22,7 +22,6 @@ const App = styled(({ className }) => {
 
                 <MD html={contentHTML} />
             </div>
-
         </Container>
 
 

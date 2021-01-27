@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface IContainerProps {
-    width?: number | string
+export const Container = styled(({ className, w, ...other }) => <div className={"youzi-container " + className} {...other} />)`
+width: ${({ w = 1200 }) => typeof w === "number" ? w + "px" : w};
+margin: 20px auto 0;
+
+@media screen and (max-width: 1080px) { 
+    width: 100%;
+    margin: 90px 0 0;
+    padding: 0 10vw;
 }
 
-export const Container: React.FC<IContainerProps> = styled.div`
-width: ${({ width = 1200 }) => typeof width === "number" ? width + "px" : width};
-margin: 0 auto;
-
+@media screen and (max-width: 768px) { 
+    padding: 0;
+}
 `;
