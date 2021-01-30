@@ -12,7 +12,7 @@ module.exports = {
         ],
     ),
     plugins: [
-        new WebpackWatchedGlobEntries(),
+        new WebpackWatchedGlobEntries()
     ],
     output: {
         filename: '[name].js',

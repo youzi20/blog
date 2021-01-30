@@ -38,7 +38,7 @@ z-index: 9999999;
 .youzi-dialog-wrap {
     position: relative;
     min-width: 520px;
-    background: #fff;
+    background: var(--bgSecondary);
     border-radius: 4px;
     box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.2);
 }
@@ -49,19 +49,28 @@ z-index: 9999999;
     top: 0;
     width: 55px;
     height: 55px;
+    color: var(--textNormal);
     text-align: center;
     line-height: 55px;
     cursor: pointer;
 }
 
 .youzi-dialog-header {
-    color: rgba(0,0,0,.85);
+    color: var(--textNormal);
     padding: 16px 24px;
 }
 
 .youzi-dialog-body {
     font-size: 14px;
     padding: 10px 24px 24px;
+}
+
+@media screen and (max-width: 768px) { 
+    .youzi-dialog-wrap {
+        position: relative;
+        min-width: calc(100% - 30px);
+    }
+
 }
 `;
 

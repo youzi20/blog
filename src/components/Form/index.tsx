@@ -36,8 +36,8 @@ const FormStyle = styled(({ className, placeholder, children, isFocus, ...other 
 })`
 position: relative;
 border-radius: 4px;
-border: 1px solid #e1e4e8;
-background: #fff;
+border: 1px solid var(--borderColor);
+background: var(--bgSecondary);
 overflow: hidden;
 
 label {
@@ -45,7 +45,7 @@ label {
     top: 16px;
     left: 0;
     font-size: 16px;
-    color: #666;
+    color: var(--textSecondary);
     line-height: 26px;
     padding-left: 12px;
     background: inherit;
@@ -85,7 +85,7 @@ input {
     display: block;
     width: 100%;
     font-size: 14px;
-    color: #121212;
+    color: var(--textNormal);
     padding: 28px 12px 10px 12px;
 }
 `;
@@ -114,7 +114,7 @@ textarea {
     display: block;
     width: 100%;
     font-size: 16px;
-    color: #121212;
+    color: var(--textNormal);
     padding: 28px 12px 10px 12px;
 }
 `;
@@ -214,7 +214,7 @@ Form.Item = styled(({ className, name, children, required, message, onChange: pr
         <FormItemContext.Provider value={{ name, status }}>
             {children}
         </FormItemContext.Provider>
-        <div className="youzi-form-help">{mssage}</div>
+        {mssage && <div className="youzi-form-help">{mssage}</div>}
     </div>
 })`
 &:not(:last-child) {

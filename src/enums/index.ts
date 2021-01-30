@@ -4,7 +4,7 @@ import { MenuTypes } from '../types'
 export const MenusEnum = [
     { name: "文章", value: MenuTypes.NEWS },
     { name: "笔记", value: MenuTypes.NOTES },
-    // { name: "留言板", value: MenuTypes.MESSAGE },
+    { name: "留言板", value: MenuTypes.MESSAGE },
     // { name: "组件", value: "module" }
 ]
 

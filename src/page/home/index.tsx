@@ -1,30 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
-import { Common, Container, ContentList, UserMessage, Footer } from '../../components';
+import { Container } from '../../components';
+import { Common, ContentList, UserMessage, Footer } from '../../module'
 
-import { Request } from "../../utils/fetch";
+
 import { MenuTypes } from '../../types';
 
 
 const App = styled(({ className }) => {
-    const [dataSource, setDataSource] = useState(null);
     const [menu, setMenu] = useState(MenuTypes.NEWS);
-
-    const queryNewsList = async () => {
-        const data = await Request("/api/news/queryNewsList.json", {
-            body: {
-                menuType: menu
-            }
-        });
-
-        setDataSource(data);
-    }
-
-    useEffect(() => {
-        queryNewsList();
-    }, [menu]);
 
     return <div className={className}>
         <Common menu={menu} onChangeMenu={setMenu} />
@@ -33,7 +19,7 @@ const App = styled(({ className }) => {
 
             {MenuTypes.MESSAGE === menu ?
                 <UserMessage /> :
-                <ContentList dataSource={dataSource} />
+                <ContentList menu={menu} />
             }
 
 
@@ -71,102 +57,102 @@ const App = styled(({ className }) => {
     background: linear-gradient(90deg, #ffbe0b, #fb5607, #ff006e, #8338ec, #3a86ff);
 }
 
-.news {
-    position: relative;
-    border-radius: 4px;
-    box-shadow: 0px 3px 15px 0px #dadada;
-    background: #fff;
+// .news {
+//     position: relative;
+//     border-radius: 4px;
+//     box-shadow: var(--boxShadow);
+//     background: var(--bgSecondary);
     
-    .content {
-        position: relative;
-        padding: 30px 20px 50px;
-        z-index: 1;
+//     .content {
+//         position: relative;
+//         padding: 30px 20px 50px;
+//         z-index: 1;
         
-        h2 {
-            font-size: 20px;
-            font-weight: bold;
-            color: #121212;
-            margin-bottom: 10px;
-        }
+//         h2 {
+//             font-size: 20px;
+//             font-weight: bold;
+//             color: var(--textNormal);
+//             margin-bottom: 10px;
+//         }
         
-        p {
-            font-size: 14px;
-            color: #121212;
-            margin-bottom: 10px;
+//         p {
+//             font-size: 14px;
+//             color: var(--textNormal);
+//             margin-bottom: 10px;
             
-            a {
-                color: #8590a6;
+//             a {
+//                 color: #8590a6;
 
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
+//                 &:hover {
+//                     text-decoration: underline;
+//                 }
+//             }
+//         }
 
-        .content-info {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
+//         .content-info {
+//             display: flex;
+//             align-items: center;
+//             margin-bottom: 15px;
             
-            .youzi-user {
-                width: 140px;
-            }
-        }
-    }
+//             .youzi-user {
+//                 width: 140px;
+//             }
+//         }
+//     }
     
-    .tag {
-        position: absolute;
-        bottom: 10px;
-        right: 20px;
-        display: flex;
-        flex-direction: column;
-        font-size: 80px;
-        font-weight: bold;
-        line-height: 90px;
-        user-select: none;
+//     .tag {
+//         position: absolute;
+//         bottom: 10px;
+//         right: 20px;
+//         display: flex;
+//         flex-direction: column;
+//         font-size: 80px;
+//         font-weight: bold;
+//         line-height: 90px;
+//         user-select: none;
         
-        span:first-child {
-            color: #fff;
-            clip-path: polygon(0 100%,100% 100%,100% 55px,0 55px);
-        }
+//         span:first-child {
+//             color: #fff;
+//             clip-path: polygon(0 100%,100% 100%,100% 55px,0 55px);
+//         }
         
-        span:last-child {
-            position: absolute;
-            color: #efefef;
-            clip-path: polygon(0 0,100% 0,100% 55px,0 55px);
-        }
-    }
+//         span:last-child {
+//             position: absolute;
+//             color: #efefef;
+//             clip-path: polygon(0 0,100% 0,100% 55px,0 55px);
+//         }
+//     }
     
-    .footer {
-        display: flex;
-        align-items: center;
-        height: 45px;
-        padding: 0 20px;
-        background: #efefef;
+//     .footer {
+//         display: flex;
+//         align-items: center;
+//         height: 45px;
+//         padding: 0 20px;
+//         background: #efefef;
         
-        .actions {
-            display: flex;
-            font-size: 22px;
-            text-align: center;
+//         .actions {
+//             display: flex;
+//             font-size: 22px;
+//             text-align: center;
 
-            > a {
-                width: 32px;
-                color: #666;
-                margin-right: 8px;
-                transition: all .3s ease;
+//             > a {
+//                 width: 32px;
+//                 color: var(--textSecondary);
+//                 margin-right: 8px;
+//                 transition: all .3s ease;
                 
-                &:hover {
-                    color: #000;
-                }
+//                 &:hover {
+//                     color: var(--textNormal);
+//                 }
                 
-                img {
-                    display: block;
-                    width: 100%;
-                }
-            } 
-        }
-    }
-}
+//                 img {
+//                     display: block;
+//                     width: 100%;
+//                 }
+//             } 
+//         }
+//     }
+// }
 `;
 
 ReactDOM.render(<App />, document.getElementById("root"));
