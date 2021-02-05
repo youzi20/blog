@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 import { Container } from '../../components';
-import { Common, ContentList, UserMessage, Footer } from '../../module'
+import { UserInfo, Sidebar, ContentList, UserMessage, Menus, Footer } from '../../module';
 
 
 import { MenuTypes } from '../../types';
@@ -13,7 +13,9 @@ const App = styled(({ className }) => {
     const [menu, setMenu] = useState(MenuTypes.NEWS);
 
     return <div className={className}>
-        <Common menu={menu} onChangeMenu={setMenu} />
+        <UserInfo w={1080} />
+        <Sidebar />
+        <Menus value={menu} onChange={setMenu} />
 
         <Container w={780}>
 
@@ -52,11 +54,6 @@ const App = styled(({ className }) => {
         <Footer />
     </div>
 })`
-&:after {
-    content:"";
-    background: linear-gradient(90deg, #ffbe0b, #fb5607, #ff006e, #8338ec, #3a86ff);
-}
-
 // .news {
 //     position: relative;
 //     border-radius: 4px;

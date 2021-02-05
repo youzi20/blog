@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { Timer } from '../components/index';
+import { Timer } from '../module';
 import { Request } from '../utils/fetch';
 
 export const UserMessage = styled(({ className }) => {

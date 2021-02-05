@@ -23,7 +23,7 @@ display: flex;
 align-items: center;
 padding: 10px 20px;
 box-shadow: var(--boxShadow);
-background: var(--bgSecondary);
+background: var(--color-5);
 opacity: 0;
 white-space: nowrap;
 transition: opacity .3s ease ,top .3s ease;
@@ -37,7 +37,7 @@ z-index: 99999;
 
 span {
     font-size: 14px;
-    color: var(--textNormal);
+    color: var(--color-1);
     line-height: 20px;
 }
 

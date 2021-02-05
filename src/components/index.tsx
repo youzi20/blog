@@ -4,6 +4,5 @@ export * from './Form';
 export * from './Dialog';
 export * from './Message';
 export * from './Markdown';
-export * from './Timer';
 export * from './Icon';
 export * from './Swiper';

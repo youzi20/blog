@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import styled from 'styled-components';
 
-import { Timer, Icon, MD } from '../components/index';
-import { User } from './index';
+import { Icon, MD } from '../components/index';
+import { Timer, User } from './index';
 
 import { Request } from "../utils/fetch";
+import { renderBlogUrl } from "../utils";
+
+import { UrlTypes } from '../types';
 
 interface ContentListProps {
     item: any
@@ -116,7 +119,7 @@ export const News: React.FC<ContentListProps> = styled(({ className, item }) => 
     }, [show]);
 
     return item ? <div className={"youzi-news " + className} ref={newsRef}>
-        <h2>{item.title}</h2>
+        <h2><a href={renderBlogUrl(UrlTypes.NEWS, item.id)} target="_blank">{item.title}</a></h2>
         <div className="news-info">
             <User name="youzi" />
             <Timer timer={item.createTimer} format="YYYY-MM-DD HH:mm" />
@@ -151,7 +154,7 @@ export const News: React.FC<ContentListProps> = styled(({ className, item }) => 
                 >
                     <Icon name="youzi_xihuan" />{data.likes || '喜欢'}
                 </span>
-                <span><Icon name="youzi_shoucang" />{data.collects || '收藏'}</span>
+                {/* <span><Icon name="youzi_shoucang" />{data.collects || '收藏'}</span> */}
                 <span className="news-action-close" onClick={handleClose}>收起<Icon name="youzi_up" /></span>
             </div>}
     </div > : "";
@@ -184,7 +187,7 @@ h2 {
 .news-desc {
     font-size: 14px;
     color: var(--textNormal);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding: 10px 15px;
     background: var(--blockBg);
     border: 1px solid var(--borderColor);

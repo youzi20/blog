@@ -1,44 +1,52 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const UserInfo: React.FC = styled(({ className }) => {
-    return <div className={"youzi-userinfo " + className}>
-        <div className="youzi-avatar">
-            <img src="/public/static/image/user/youzi.jpeg" alt="" />
-        </div>
-        <p className="youzi-nickname">柚子青年。</p>
-    </div>
-})`
-display:none;
+import { useWindowZoom } from '../hooks';
 
-@media screen and (max-width: 1080px) {
-    position: fixed;
-    top: 0;
-    left: 0;
+export const UserInfo = styled(({ className, w, content }) => {
+    const { width } = useWindowZoom();
+
+    return !w || width <= w ? <div className={"youzi-user-info " + className}>
+        <a className="user-info" href="/">
+            <div className="avatar">
+                <img src="/public/static/image/user/youzi.jpeg" alt="" />
+            </div>
+            <p className="nickname">柚子青年。</p>
+        </a>
+        <div className="youzi-user-info-action">
+            {content}
+        </div>
+    </div> : null
+})`
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+padding: 15px 20px;
+background: var(--bgSecondary);
+box-shadow: var(--boxShadow);
+z-index: 9999;
+
+.user-info {
     display: flex;
     align-items: center;
-    width: 100%;
-    padding: 15px 20px;
-    background: var(--bgSecondary);
-    box-shadow: var(--boxShadow);
-    z-index: 9999;
+}
 
-    .youzi-avatar {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-        border-radius: 2px;
-        overflow: hidden;
+.avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 2px;
+    overflow: hidden;
 
-        img {
-            width: 100%;
-        }
+    img {
+        width: 100%;
     }
+}
 
-    .youzi-nickname {
-        font-weight: bold;
-        font-size: 14px;
-        color: var(--textNormal);
-    }
+.nickname {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--textNormal);
 }
 `

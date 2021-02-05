@@ -15,7 +15,7 @@ export const User: React.FC<{ name: string }> = styled(({ className, name }) => 
 
     return <span className={"youzi-user " + className}>
         <a href={info.github}>
-            <i className="youzi-user-icon"><Icon name={info.icon} /></i>
+            <i className="icon"><Icon name={info.icon} /></i>
             {info.name}
         </a>
     </span>
@@ -34,10 +34,9 @@ a {
     }
 }
 
-.youzi-user-icon {
+.icon {
     width: 22px;
     font-size: 16px;
-    color: var(--textSecondary);
     text-align: center;
     margin-right: 5px;
 }

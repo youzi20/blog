@@ -54,7 +54,7 @@ export const Sidebar = styled(({ className }) => {
 
         setTheme(theme);
         document.body.className = theme;
-        
+
         if (windowTheme) {
             document.querySelector("link[rel=icon]").setAttribute("href", `/public/static/favicons/favicon-${theme}.ico`);
         }
@@ -79,7 +79,6 @@ li {
     width: 40px;
     height: 40px;
     color: var(--textNormal);
-    margin-top: 10px;
     border-radius: 20px;
     border: 1px solid var(--borderColor);
     box-shadow: 0 0 5px rgba(0,0,0,.05);
@@ -88,6 +87,11 @@ li {
     white-space: nowrap;
     transition: all .3s ease;
     overflow: hidden;
+
+
+    &:not(:first-child) {
+        margin-top: 10px;
+    }
 
     .youzi-icon {
         font-size: 18px;

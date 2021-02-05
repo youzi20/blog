@@ -16,9 +16,12 @@
 .markdown-body h6 {
   font-weight: bold;
   line-height: 1.5;
-  margin-top: 35px;
   margin-bottom: 10px;
   padding-bottom: 5px;
+
+  &:not(:first-child) {
+    margin-top: 35px;
+  }
 }
 .markdown-body h1 {
   font-size: 30px;

@@ -9,8 +9,8 @@ interface WindowZoom {
 
 export const useWindowZoom: () => WindowZoom = () => {
     const [body] = useState(document.getElementsByTagName("body")[0])
-    const [width, setWidth] = useState(0);
-    const [height, setHeight] = useState(0);
+    const [width, setWidth] = useState(body.clientWidth);
+    const [height, setHeight] = useState(window.innerHeight);
 
     const refresh = () => {
         setWidth(body.clientWidth);
@@ -18,8 +18,6 @@ export const useWindowZoom: () => WindowZoom = () => {
     }
 
     useEffect(() => {
-        refresh();
-
         window.addEventListener("resize", refresh);
     }, []);
 
