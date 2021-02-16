@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState, forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { LiteralUnion } from '../../types';
@@ -14,19 +14,13 @@ interface BaseProps {
     name?: string
 }
 
-interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
-    Item: React.FC<{}>
-
-    onSubmit: (values, errors) => void
-}
-
 type InputProps = {
 
 } & BaseProps
 
 
-const FormContext = createContext({});
-const FormItemContext = createContext({});
+const FormContext = createContext({ addFeildEffects(name, effects) { } });
+const FormItemContext = createContext({ name: null, status: null });
 
 const FormStyle = styled(({ className, placeholder, children, isFocus, ...other }) => {
     return <div className={"youzi-form-content " + className} {...other}>
@@ -138,10 +132,9 @@ cursor: pointer;
 }
 `;
 
-export const Form: React.FC<FormProps> = ({ onSubmit, ...other }) => {
+export const Form = forwardRef(({ onSubmit, ...other }, ref) => {
     const formNames = useRef({});
     const feildEffects = useRef({});
-
 
     const addFeildEffects = (name, effects) => {
         feildEffects.current[name] = effects;
@@ -176,9 +169,9 @@ export const Form: React.FC<FormProps> = ({ onSubmit, ...other }) => {
     };
 
     return <FormContext.Provider value={{ addFeildEffects }}>
-        <form autoComplete="off" onChange={onChange} onSubmit={handleSubmit} {...other} />
+        <form ref={ref} autoComplete="off" onChange={onChange} onSubmit={handleSubmit} {...other} />
     </FormContext.Provider>
-}
+})
 
 Form.Item = styled(({ className, name, children, required, message, onChange: propsOnChange, ...other }) => {
     const [status, setStatus] = useState("");

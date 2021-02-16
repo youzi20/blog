@@ -9,8 +9,6 @@ export const NewsInfo = styled(({ className, id, total, userAction, ...other }) 
     const [data, setData] = useState(total || { zan: 0, cai: 0, likes: 0, collects: 0, views: 0 });
     const [userData, setUserData] = useState(userAction || { zan: false, cai: false, likes: false, });
 
-    console.log(data);
-
     const dataStatistics = (type, status?: boolean) => {
         Request("/api/news/dataStatistics.json", {
             method: "POST",
@@ -82,7 +80,7 @@ li {
     position: relative;
     width: 40px;
     height: 40px;
-    color: var(--textNormal);
+    color: var(--textSecondary);
     border-radius: 20px;
     border: 1px solid var(--borderColor);
     box-shadow: 0 0 5px rgba(0,0,0,.05);
@@ -93,6 +91,22 @@ li {
     &:not(:first-child) {
         margin-top: 10px;
         cursor: pointer;
+
+        &:hover {
+            color: var(--textNormal);
+            
+            span {
+                background-color: var(--textNormal);
+            }
+        }
+    
+        &.active {
+            color: var(--highLightIcon);
+    
+            span {
+                background-color: var(--highLightIcon);
+            }
+        }
     }
 
     .youzi-icon {
@@ -113,13 +127,6 @@ li {
         border-radius: 7px;
         transform-origin: left top;
         transform: scale(0.8);
-    }
-
-    &.active {
-        color: var(--highLightIcon);
-        span {
-            background-color: var(--highLightIcon);
-        }
     }
 }
 

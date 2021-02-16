@@ -1,61 +1,43 @@
 const path = require('path');
 const WebpackWatchedGlobEntries = require('webpack-watched-glob-entries-plugin');
 
-console.log(__dirname)
-
 module.exports = {
     // TS 执行入口文件
     entry: WebpackWatchedGlobEntries.getEntries(
         [
             // Your path(s)
-            path.resolve(__dirname, './src/page/*/index.[j|t]sx'),
+            path.resolve(__dirname, './src/page/*/index.[j|t]sx')
         ],
     ),
-    plugins: [
-        new WebpackWatchedGlobEntries()
-    ],
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, './dist'),
     },
+    plugins: [
+        new WebpackWatchedGlobEntries()
+    ],
     externals: {
-        // React: 'React',
-        // ReactDOM: 'ReactDOM'
+        react: 'React',
+        ['react-dom']: 'ReactDOM',
+        ['react-content-loader']: 'ReactContentLoader',
+        ['styled-components']: 'styled',
+        ['highlight.js']: 'highlight'
     },
     resolve: {
-        // 先尝试 ts，tsx 后缀的 TypeScript 源码文件
-        extensions: ['.ts', '.tsx', '.js'],
+        alias: {
+            ['@components']: path.resolve(__dirname, './src/@components/'),
+        },
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
     module: {
         rules: [
             {
                 test: /\.scss|sass|css$/,
-                use: ["style-loader", "css-loader", "sass-loader",],
+                use: ["style-loader", "css-loader", "sass-loader"],
             },
             {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader'
-            },
-            {
-                test: /\.js|jsx$/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
-                },
-                exclude: /node_modules/
-            },
-            {
-                test: /\.(png|jpg|gif|jpe?g|svg)$/,
-                use: {
-                    loader: 'url-loader',
-                    options: {
-                        limit: 2048,
-                        name: '[name].[ext]',
-                        outputPath: 'images/'
-                    }
-                }
             }
         ]
     },
