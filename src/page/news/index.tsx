@@ -5,7 +5,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { Container, MD } from '../../components';
 import { UserInfo, Sidebar, Footer, User, Timer, NewsInfo } from '../../module';
 
-
+// @ts-ignore
 const dataSource = window.__global_data__;
 const { id, title, contentHTML, createTimer, updateTimer, total, userAction } = dataSource || {};
 

@@ -1,7 +1,22 @@
-import React, { createContext, useContext, useEffect, useRef, useState, forwardRef } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { LiteralUnion } from '../../types';
+import { LiteralUnion } from '../__utils__';
+
+interface FormProps {
+    onSubmit?: (value, error) => any
+}
+
+interface FormItemProps {
+    name?: string
+    required?: boolean
+    message?: string | React.ReactNode
+    onChange?: (val) => void
+}
+
+interface FormInterface extends React.FC<FormProps> {
+    Item: React.FC<FormItemProps>;
+}
 
 
 interface BaseProps {
@@ -21,6 +36,109 @@ type InputProps = {
 
 const FormContext = createContext({ addFeildEffects(name, effects) { } });
 const FormItemContext = createContext({ name: null, status: null });
+
+
+export const Form: FormInterface = props => {
+    const formNames = useRef({});
+    const feildEffects = useRef<any>();
+
+    const { onSubmit, ...other } = props;
+
+    const addFeildEffects = (name, effects) => {
+        feildEffects.current[name] = effects;
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        let values, errors;
+        
+        // @ts-ignore
+        Object.entries(feildEffects.current).forEach(([key, { onValidate }]) => {
+            const value = formNames.current[key];
+
+            const validateRes = onValidate(value);
+
+            if (validateRes.error) {
+                if (!errors) errors = {};
+                errors[key] = validateRes;
+            } else {
+                if (!values) values = {};
+                values[key] = value;
+            }
+        });
+
+        onSubmit && onSubmit(values, errors);
+    }
+
+    const onChange = (e) => {
+        const { name, value } = e.target;
+        formNames.current[name] = value;
+        feildEffects.current[name].onChange(value);
+    };
+
+    return <FormContext.Provider value={{ addFeildEffects }}>
+        <form autoComplete="off" onChange={onChange} onSubmit={handleSubmit} {...other} />
+    </FormContext.Provider>
+};
+
+Form.Item = styled(({ className, name, children, required, message, onChange: propsOnChange, ...other }) => {
+    const [status, setStatus] = useState("");
+    const [mssage, setMessage] = useState("");
+    const { addFeildEffects } = useContext(FormContext);
+
+    const onChange = (value) => {
+        onValidate(value);
+        propsOnChange && propsOnChange(value);
+    }
+
+    const onValidate = (value) => {
+        if (required && !value) {
+            const msg = message || name + "为必填字段";
+
+            setStatus("error");
+            setMessage(msg);
+            return { error: true, messge: msg };
+        }
+
+        setStatus("");
+        setMessage("");
+        return {}
+    }
+
+    useEffect(() => {
+        if (name) {
+            addFeildEffects(name, { onChange, onValidate })
+        }
+    }, []);
+
+    return <div className={"youzi-form-item " + (status ? `youzi-form-${status} ` : "") + className} {...other} >
+        <FormItemContext.Provider value={{ name, status }}>
+            {children}
+        </FormItemContext.Provider>
+        {mssage && <div className="youzi-form-help">{mssage}</div>}
+    </div>
+})`
+&:not(:last-child) {
+    margin-bottom: 18px;
+}
+
+.youzi-form-help {
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 5px;
+}
+
+&.youzi-form-error {
+    .youzi-form-content{
+        border-color: #ff3000;
+    }
+
+    .youzi-form-help {
+        color: #ff3000;
+    }
+}
+`;
 
 const FormStyle = styled(({ className, placeholder, children, isFocus, ...other }) => {
     return <div className={"youzi-form-content " + className} {...other}>
@@ -131,102 +249,3 @@ cursor: pointer;
     opacity: 1;
 }
 `;
-
-export const Form = forwardRef(({ onSubmit, ...other }, ref) => {
-    const formNames = useRef({});
-    const feildEffects = useRef({});
-
-    const addFeildEffects = (name, effects) => {
-        feildEffects.current[name] = effects;
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        let values, errors;
-
-        Object.entries(feildEffects.current).forEach(([key, { onValidate }]) => {
-            const value = formNames.current[key];
-
-            const validateRes = onValidate(value);
-
-            if (validateRes.error) {
-                if (!errors) errors = {};
-                errors[key] = validateRes;
-            } else {
-                if (!values) values = {};
-                values[key] = value;
-            }
-        });
-
-        onSubmit && onSubmit(values, errors);
-    }
-
-    const onChange = (e) => {
-        const { name, value } = e.target;
-        formNames.current[name] = value;
-        feildEffects.current[name].onChange(value);
-    };
-
-    return <FormContext.Provider value={{ addFeildEffects }}>
-        <form ref={ref} autoComplete="off" onChange={onChange} onSubmit={handleSubmit} {...other} />
-    </FormContext.Provider>
-})
-
-Form.Item = styled(({ className, name, children, required, message, onChange: propsOnChange, ...other }) => {
-    const [status, setStatus] = useState("");
-    const [mssage, setMessage] = useState("");
-    const { addFeildEffects } = useContext(FormContext);
-
-    const onChange = (value) => {
-        onValidate(value);
-        propsOnChange && propsOnChange(value);
-    }
-
-    const onValidate = (value) => {
-        if (required && !value) {
-            const msg = message || name + "为必填字段";
-
-            setStatus("error");
-            setMessage(msg);
-            return { error: true, messge: msg };
-        }
-
-        setStatus("");
-        setMessage("");
-        return {}
-    }
-
-    useEffect(() => {
-        if (name) {
-            addFeildEffects(name, { onChange, onValidate })
-        }
-    }, []);
-
-    return <div className={"youzi-form-item " + (status ? `youzi-form-${status} ` : "") + className} {...other} >
-        <FormItemContext.Provider value={{ name, status }}>
-            {children}
-        </FormItemContext.Provider>
-        {mssage && <div className="youzi-form-help">{mssage}</div>}
-    </div>
-})`
-&:not(:last-child) {
-    margin-bottom: 18px;
-}
-
-.youzi-form-help {
-    font-size: 12px;
-    line-height: 20px;
-    margin-top: 5px;
-}
-
-&.youzi-form-error {
-    .youzi-form-content{
-        border-color: #ff3000;
-    }
-
-    .youzi-form-help {
-        color: #ff3000;
-    }
-}
-`

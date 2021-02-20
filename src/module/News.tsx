@@ -27,7 +27,7 @@ export const News: React.FC<ContentListProps> = styled(({ className, item }) => 
     const [data, setData] = useState({ zan: 0, cai: 0, likes: 0, collects: 0, views: 0 });
     const [userData, setUserData] = useState({ zan: false, cai: false, likes: false, });
     const eventListener = useCallback(() => handleScrool(), []);
-    const newsRef = useRef();
+    const newsRef = useRef<HTMLDivElement>();
 
     const queryDataById = async () => {
         const { total, userAction } = await Request("/api/news/queryDataById.json", {
@@ -115,6 +115,11 @@ export const News: React.FC<ContentListProps> = styled(({ className, item }) => 
 
             document.addEventListener("scroll", eventListener);
             document.addEventListener("resize", eventListener);
+
+            return () => {
+                document.removeEventListener("scroll", eventListener);
+                document.removeEventListener("resize", eventListener);
+            }
         }
     }, [show]);
 
@@ -187,7 +192,6 @@ h2 {
 .news-desc {
     font-size: 14px;
     color: var(--textNormal);
-    margin-bottom: 15px;
     padding: 10px 15px;
     background: var(--blockBg);
     border: 1px solid var(--borderColor);

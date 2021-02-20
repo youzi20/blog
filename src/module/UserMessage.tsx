@@ -13,7 +13,6 @@ export const UserMessage = styled(({ className }) => {
         setDataSource(data);
     }
 
-
     useEffect(() => {
         queryMessageList();
     }, []);
@@ -87,7 +86,7 @@ export const UserMessage = styled(({ className }) => {
     transition: all .3s ease;
 
     &:hover {
-        background: var(--bgSecondary-hover);
+        background: var(--messageItem-hover);
     }
 
     &:not(:last-child):after {

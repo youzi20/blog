@@ -70,8 +70,8 @@ interface RequestInit {
     window?: any;
 }
 
-const optionInit = (url: string, params: OptionsProps) => {
-    const options: OptionsProps = {
+const optionInit = (url: string, params: OptionsProps): [string, RequestInit, { handleErrorMessage: HandleErrorMessage, handleCatchMessage: HandleCatchMessage }] => {
+    const defaultConfig = {
         method: "GET",
         credentials: 'include',
         handleErrorMessage(response) {
@@ -82,19 +82,19 @@ const optionInit = (url: string, params: OptionsProps) => {
         }
     }
 
-    Object.assign(options, params);
+    const { body, rawJson, handleErrorMessage, handleCatchMessage, ...other } = Object.assign({}, defaultConfig, params);
+    const options: OptionsProps = {};
 
-    const { body, rawJson, handleErrorMessage, handleCatchMessage, ...other } = options;
 
     if (other.method === "GET" && body) {
         url += "?" + Object.entries(body).map(([key, value]) => `${key}=${value}`).join("&");
     } else if (other.method === "POST") {
         if (rawJson) {
-            other.headers = {
+            options.headers = {
                 "Content-Type": "application/json; charset=utf-8"
             }
 
-            other.body = JSON.stringify(options.rawJson);
+            options.body = JSON.stringify(rawJson);
         }
     }
 
@@ -102,7 +102,7 @@ const optionInit = (url: string, params: OptionsProps) => {
 }
 
 export const Request = (url: string, params?: OptionsProps) => {
-    const [urls, options, callback]: [string, RequestInit, { handleErrorMessage: HandleErrorMessage, handleCatchMessage: HandleCatchMessage }] = optionInit(url, params || {});
+    const [urls, options, callback] = optionInit(url, params || {});
 
     return fetch(urls, options)
         .then((body) => {

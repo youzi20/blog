@@ -17,10 +17,11 @@
   font-weight: bold;
   line-height: 1.5;
   margin-bottom: 10px;
+  margin-top: 35px;
   padding-bottom: 5px;
 
   &:not(:first-child) {
-    margin-top: 35px;
+    
   }
 }
 .markdown-body h1 {
@@ -55,6 +56,8 @@
 }
 .markdown-body img {
   max-width: 100%;
+  margin: 10px 0;
+  border: 1px solid #e5e5e5;
 }
 .markdown-body hr {
   border: none;
@@ -70,6 +73,7 @@
   color: var(--highLightText);
   font-size: 0.87em;
   padding: 0.065em 0.4em;
+  margin: 0 0.2em;
 }
 .markdown-body code,
 .markdown-body pre {
