@@ -1,9 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { render, createPortal } from 'react-dom';
 import styled from 'styled-components';
+
 import { Icon } from '../index';
 
-import { IMessageConfig } from './types';
+import { LiteralUnion } from '@/types/__utils__';
+
+export interface IMessageConfig {
+    name: LiteralUnion<
+    | "youzi_success",
+    string
+    >
+    message?: string | React.ReactNode
+}
 
 const MessageWrapper = styled(({ className, name, message = "这是一个提示", onClose }) => {
     const [styles, setStyles] = useState({});

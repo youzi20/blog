@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { LiteralUnion } from '../__utils__';
+import { LiteralUnion } from '@/types/__utils__';
 
 interface FormProps {
     onSubmit?: (value, error) => any
-}
+}   
 
 interface FormItemProps {
     name?: string
@@ -17,7 +17,6 @@ interface FormItemProps {
 interface FormInterface extends React.FC<FormProps> {
     Item: React.FC<FormItemProps>;
 }
-
 
 interface BaseProps {
     placeholder?: string
@@ -40,7 +39,7 @@ const FormItemContext = createContext({ name: null, status: null });
 
 export const Form: FormInterface = props => {
     const formNames = useRef({});
-    const feildEffects = useRef<any>();
+    const feildEffects = useRef<any>({});
 
     const { onSubmit, ...other } = props;
 

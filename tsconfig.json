@@ -1,17 +1,23 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true, // 允许合成默认导入
     "esModuleInterop": true,
+    "moduleResolution": "Node",
     "removeComments": true,
-    "noUnusedLocals": true,
-    "allowJs": true,
+    "allowJs": true, //  允许在ts内引用js
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+    },
+    // "include": [
+    //   "./src/**/*",
+    // ],
+    // "exclude": [
+    //   "node_modules"
+    // ],
     "module": "esnext",
     "target": "es5",
     "jsx": "react",
-  }
-  //  "exclude": [
-  //    // 不编译这些目录里的文件
-  //    "node_modules"
-  //  ]
+  },
 }

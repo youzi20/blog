@@ -1,7 +1,9 @@
 const path = require('path');
 const WebpackWatchedGlobEntries = require('webpack-watched-glob-entries-plugin');
+// const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
+    // entry: path.resolve(__dirname,'./src/page/home/index.tsx'),
     // TS 执行入口文件
     entry: WebpackWatchedGlobEntries.getEntries(
         [
@@ -11,10 +13,11 @@ module.exports = {
     ),
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-        new WebpackWatchedGlobEntries()
+        // new CleanWebpackPlugin(),
+        new WebpackWatchedGlobEntries(),
     ],
     externals: {
         react: 'React',
@@ -25,7 +28,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            ['@components']: path.resolve(__dirname, './src/@components/'),
+            '@': path.resolve('src'),
         },
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
