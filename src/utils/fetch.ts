@@ -83,7 +83,7 @@ const optionInit = (url: string, params: OptionsProps): [string, RequestInit, { 
     }
 
     const { body, rawJson, handleErrorMessage, handleCatchMessage, ...other } = Object.assign({}, defaultConfig, params);
-    const options: OptionsProps = {};
+    const options: RequestInit = Object.assign({}, other);
 
 
     if (other.method === "GET" && body) {
@@ -98,7 +98,7 @@ const optionInit = (url: string, params: OptionsProps): [string, RequestInit, { 
         }
     }
 
-    return [url, other || {}, { handleErrorMessage, handleCatchMessage }];
+    return [url, options || {}, { handleErrorMessage, handleCatchMessage }];
 }
 
 export const Request = (url: string, params?: OptionsProps) => {
