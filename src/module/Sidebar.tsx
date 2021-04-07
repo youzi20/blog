@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { Icon, Form, Input, Textarea, Submit, Dialog, Message } from '../components/index';
-import { Request } from "../utils/fetch";
+import { Icon, Form, Input, Textarea, Submit, Dialog, Message } from '@/components';
+import { Request } from "@/utils/fetch";
 
 export const Sidebar = styled(({ className }) => {
     const [theme, setTheme] = useState("light");

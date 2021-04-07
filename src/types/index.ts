@@ -6,7 +6,8 @@ export enum CommonTypes {
 export enum MenuTypes {
     NEWS = "news",
     NOTES = "notes",
-    MESSAGE = "message"
+    TOOLS = "tools",
+    MESSAGES = "messages"
 }
 
 export enum UrlTypes {

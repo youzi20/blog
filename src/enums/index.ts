@@ -1,10 +1,12 @@
-import { MenuTypes } from '../types'
+import { MenuTypes } from '@/types'
 
-
+const MenuLink = (name) => "/" + name;
+const PathName = location.pathname;
 export const MenusEnum = [
-    { name: "文章", value: MenuTypes.NEWS },
-    { name: "笔记", value: MenuTypes.NOTES },
-    { name: "留言板", value: MenuTypes.MESSAGE },
+    { name: "文章", link: MenuLink(MenuTypes.NEWS), match: ["/", "/news"].indexOf(PathName) > -1 },
+    { name: "随记", link: MenuLink(MenuTypes.NOTES), match: ["/notes"].indexOf(PathName) > -1 },
+    { name: "工具", link: MenuLink(MenuTypes.TOOLS), match: ["/tools"].indexOf(PathName) > -1 },
+    { name: "留言板", link: MenuLink(MenuTypes.MESSAGES), match: ["/messages"].indexOf(PathName) > -1 },
     // { name: "组件", value: "module" }
 ]
 

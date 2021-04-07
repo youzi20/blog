@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import moment from '../utils/moment';
+
+import moment from '@/utils/moment';
 
 interface TimerProps {
     timer: string | number

@@ -1,4 +1,4 @@
-import { UrlTypes } from '../types';
+import { UrlTypes } from '@/types';
 
 const urlMap = {
     [UrlTypes.NEWS]: "news"

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 
-import { Container, MD } from '../../components';
-import { UserInfo, Sidebar, Footer, User, Timer, NewsInfo } from '../../module';
+import { MainContainer, MD } from '@/components';
+import { Header, Footer, User, Timer, NewsInfo } from '@/module';
 
 // @ts-ignore
 const dataSource = window.__global_data__;
@@ -50,10 +50,9 @@ const App = styled(({ className }) => {
     }, []);
 
     return <div className={className}>
-        <UserInfo content={sticky ? <StickyTitle /> : ""} />
-        <Sidebar />
+        <Header action={sticky ? <StickyTitle /> : ""} />
         <NewsInfo {...{ id, total, userAction }} />
-        <Container w={780}>
+        <MainContainer w={780}>
             <div className="news-content">
                 <h1 ref={titleRef}>{title}</h1>
                 <div className="news-info">
@@ -61,20 +60,17 @@ const App = styled(({ className }) => {
                     <Timer timer={createTimer} format="YYYY-MM-DD HH:mm" />
                 </div>
 
-                <MD
-                    html={contentHTML}
-                    tips={<>最后更新：<Timer timer={updateTimer} format="YYYY-MM-DD HH:mm" /></>}
-                />
+                <MD html={contentHTML} />
+
+                <div className="news-tips">
+                    最后更新：<Timer timer={updateTimer} format="YYYY-MM-DD HH:mm" />
+                </div>
             </div>
-        </Container>
+        </MainContainer>
 
         <Footer />
     </div>
 })`
-.youzi-container {
-    margin-top: 90px;
-}
-
 .news-content {
     h1 {
         font-size: 28px;
@@ -94,6 +90,12 @@ const App = styled(({ className }) => {
             width: 140px;
         }
     }
+
+    .news-tips {
+        font-size: 12px;
+        color: #8590a6;
+        margin-top: 20px;
+    }
 }
 
 @media screen and (max-width: 768px) { 
@@ -108,4 +110,4 @@ const App = styled(({ className }) => {
 }
 `;
 
-ReactDOM.render(<App />, document.getElementById("root"));
+render(<App />, document.getElementById("root"));

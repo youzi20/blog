@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { render, createPortal } from 'react-dom';
 import styled from 'styled-components';
 
-import { Icon } from '../index';
+import { Icon } from '@/components';
 
 import { LiteralUnion } from '@/types/__utils__';
 

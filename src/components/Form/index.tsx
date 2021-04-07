@@ -5,7 +5,7 @@ import { LiteralUnion } from '@/types/__utils__';
 
 interface FormProps {
     onSubmit?: (value, error) => any
-}   
+}
 
 interface FormItemProps {
     name?: string
@@ -51,7 +51,7 @@ export const Form: FormInterface = props => {
         e.preventDefault();
 
         let values, errors;
-        
+
         // @ts-ignore
         Object.entries(feildEffects.current).forEach(([key, { onValidate }]) => {
             const value = formNames.current[key];
@@ -160,7 +160,7 @@ label {
     line-height: 26px;
     padding-left: 12px;
     background: inherit;
-    transition: all .1s ease;
+    transition: top .1s ease, width .1s ease, fontSize .1s ease;
     pointer-events: none;
     
     &.youzi-form-above {

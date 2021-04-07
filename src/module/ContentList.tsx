@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ContentLoader from "react-content-loader";
 
-import { News } from './index';
+import { News } from '@/module';
 
-import { Request } from "../utils/fetch";
-import { MenuTypes } from '../types';
+import { Request } from "@/utils/fetch";
+import { MenuTypes } from '@/types';
 
 
 interface ContentListProps {
-    menu: MenuTypes
+    menu: MenuTypes | string
 }
 
-export const ContentList: React.FC<ContentListProps> = styled(({ className, menu }) => {
+export const ContentList: React.FC<ContentListProps> = styled(({ className, menu = MenuTypes.NEWS }) => {
     const [dataSource, setDataSource] = useState(null);
 
     const queryNewsList = async () => {

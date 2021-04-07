@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import styled from 'styled-components';
 
-import { Icon, MD } from '../components/index';
-import { Timer, User } from './index';
+import { Icon, MD } from '@/components';
+import { Timer, User } from '@/module';
 
-import { Request } from "../utils/fetch";
-import { renderBlogUrl } from "../utils";
+import { Request } from "@/utils/fetch";
+import { renderBlogUrl } from "@/utils";
 
-import { UrlTypes } from '../types';
+import { UrlTypes } from '@/types';
 
 interface ContentListProps {
     item: any
@@ -78,6 +78,11 @@ export const News: React.FC<ContentListProps> = styled(({ className, item }) => 
         }
     }
 
+    const handleShow = () => {
+        setShow(true);
+        // setBodyStyle({ maxHeight: "initial" });
+    }
+
     const handleClose = () => {
         document.removeEventListener("scroll", eventListener);
         document.removeEventListener("resize", eventListener);
@@ -124,22 +129,23 @@ export const News: React.FC<ContentListProps> = styled(({ className, item }) => 
     }, [show]);
 
     return item ? <div className={"youzi-news " + className} ref={newsRef}>
-        <h2><a href={renderBlogUrl(UrlTypes.NEWS, item.id)} target="_blank">{item.title}</a></h2>
+        <h2 className="news-title"><a href={renderBlogUrl(UrlTypes.NEWS, item.id)} target="_blank">{item.title}</a></h2>
         <div className="news-info">
             <User name="youzi" />
             <Timer timer={item.createTimer} format="YYYY-MM-DD HH:mm" />
         </div>
         <p className="news-desc">{item.description}</p>
 
-        <MD
-            html={item.contentHTML}
-            maxHeight={330}
-            show={show}
-            tips={<>最后更新：<Timer timer={item.updateTimer} format="YYYY-MM-DD HH:mm" /> {data.views ? `· 阅读数 ${data.views}` : ""}</>}
-            onChange={handleView}
-        />
-
-        {show &&
+        <div className="news-content" style={{ maxHeight: show ? "inherit" : 330 }}>
+            <MD html={item.contentHTML} />
+            <div className="news-tips">
+                最后更新：<Timer timer={item.updateTimer} format="YYYY-MM-DD HH:mm" /> {data.views ? `· 阅读数 ${data.views}` : ""}
+            </div>
+        </div>
+        {!show ?
+            <div className="news-all" >
+                <span onClick={handleShow}>阅读全文 <Icon name="youzi_down" /></span>
+            </div> :
             <div className="news-action" style={actionStyle}>
                 <span
                     className={userData.zan ? "active" : ""}
@@ -170,10 +176,10 @@ border-radius: 4px;
 box-shadow: var(--boxShadow);
 background: var(--bgSecondary);
 
-h2 {
+.news-title {
     font-size: 20px;
     font-weight: bold;
-    color: var(--textNormal);
+    color: var(--newsText);
     margin-bottom: 10px;
 }
 
@@ -191,11 +197,45 @@ h2 {
 
 .news-desc {
     font-size: 14px;
-    color: var(--textNormal);
+    color: var(--newsText);
     padding: 10px 15px;
-    background: var(--blockBg);
+    background: var(--newsBlockBg);
     border: 1px solid var(--borderColor);
     border-radius: 4px;
+}
+
+.news-content {
+    padding-bottom:50px;
+    overflow: hidden;
+}
+
+.news-tips {
+    font-size: 12px;
+    color: #8590a6;
+    margin-top: 20px;
+}
+
+.news-all {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+    padding-top: 70px;
+    background: var(--newsLinearGradient);
+    cursor: pointer;
+
+    span {
+        color: var(--newsText);
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: var(--newsAllText-hover);
+        }
+    }
 }
 
 .news-action {
@@ -220,7 +260,7 @@ h2 {
 
         &.active,
         &:hover {
-            color: var(--textNormal);
+            color: var(--newsText);
         }
 
         &.news-action-close {
@@ -229,12 +269,12 @@ h2 {
             min-width: 80px;
             height: 30px;
             justify-content: center;
-            color: var(--highLightText);
+            color: var(--newsActionText);
             border-radius: 2px;
-            background: var(--highLightBg);
+            background: var(--newsActionBg);
 
             &:hover {
-                background:var(--highLightBg-hover); 
+                background:var(--newsActionBg-hover); 
             }
 
             .youzi-icon {

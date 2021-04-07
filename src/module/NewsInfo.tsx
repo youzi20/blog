@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Icon } from '../components/index';
+import { Icon } from '@/components';
 
-import { Request } from "../utils/fetch";
+import { Request } from "@/utils/fetch";
 
 export const NewsInfo = styled(({ className, id, total, userAction, ...other }) => {
     const [data, setData] = useState(total || { zan: 0, cai: 0, likes: 0, collects: 0, views: 0 });

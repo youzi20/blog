@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, createPortal } from 'react-dom';
 import styled from 'styled-components';
-import { Icon } from './index';
+import { Icon } from '@/components';
 
 const DialogWrapper = styled(({ className, title, content, onClose }) => {
     return <div className={"youzi-dialog " + className}>

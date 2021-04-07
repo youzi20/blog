@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 export const Footer: React.FC<any> = styled(({className}) => {
-    return <div className={className}>
+    return <div className={`youzi-footer ${className}`}>
         <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备19109417号</a>
     </div>
 })`

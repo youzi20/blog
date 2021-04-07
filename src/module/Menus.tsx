@@ -1,80 +1,65 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { MenusEnum } from '../enums'
+import { MenusEnum } from '@/enums'
 
-export const Menus = styled(({ className, value, show: propsShow, onChange, onChangeStatus }) => {
-    const [show, setShow] = useState(propsShow || false);
-
-    const handleClick = (value) => {
-        setShow(false);
-        onChange && onChange(value);
-        onChangeStatus && onChangeStatus(false);
-    }
+export const Menus = styled(({ className }) => {
+    const [show, setShow] = useState(false);
 
     const handleToggle = () => {
         setShow(!show);
-        onChangeStatus && onChangeStatus(!show);
     }
 
-    useEffect(() => {
-        if (propsShow !== show) setShow(propsShow);
-    }, [propsShow]);
-
     return <div className={"youzi-menus " + className}>
-        <div className={"youzi-menu-btn" + (show ? " active" : "")}
+        <div className={"youzi-menu-btn " + (show ? "active" : "")}
             onClick={handleToggle}>
             <span /><span /><span />
         </div>
-        <ul className={show ? "active" : ""}>
+        <ul className={show ? "active" : null}>
             {MenusEnum.map(item =>
-                <li className={value === item.value ? "active" : ""}
-                    key={item.value}
-                    onClick={() => handleClick(item.value)}
+                <li className={item.match ? "active" : null}
+                    key={item.name}
                 >
-                    {item.name}
+                    <a href={item.link}>{item.name}</a>
                 </li>)}
         </ul>
     </div>
 })`
-position: fixed;
-top: 20px;
-left: 50%;
-width: 80px;
-font-size: 13px;
-color: var(--textNormal);
-text-align: center;
-margin-left: -490px;
-z-index: 99999;
+font-size: 14px;
+color: var(--menuText);
+
+.youzi-menu-btn {
+    display: none;
+}
 
 ul {
-    padding: 10px 0;
-    border-radius: 8px;
-    border: 1px solid var(--borderColor);
-    background: var(--bgSecondary);
+    display: flex;
 
     li {
-        line-height: 36px;
-        transition: all .3s ease;
-        cursor: pointer;
+        font-family: PingFangSC-Medium;
+        line-height: 32px;
+        margin-right: 30px;
 
-        &:hover,
-        &.active {
-            color: var(--textNormal-hover);
-            background: var(--bgSecondary-hover);
+        &:hover {
+            color: var(--menuText-hover);
         }
+
+        &.active {
+            color: var(--menuText-hover);
+            border-radius: 6px;
+            background: var(--menuItemBg-active);
+        }
+    }
+
+    a {
+        display: block;
+        padding: 0 15px;
+        cursor: pointer;
     }
 }
 
 
-@media screen and (max-width: 1080px) { 
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    color: #8d8d8d;
-    text-align: left;
-
+@media screen and (max-width: 768px) { 
     .youzi-menu-btn {
         position: fixed;
         top: 15px;
@@ -86,7 +71,7 @@ ul {
         height: 40px;
         cursor: pointer;
         overflow: hidden;
-        z-index: 1;
+        z-index: 99;
     
         span {
             position: relative;
@@ -130,16 +115,15 @@ ul {
         position: fixed;
         top: -100%;
         left: 0;
-        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 100%;
         height: 100%;
-        border: 0;
-        border-radius: 0;
+        color: #8d8d8d;
         background:var(--menuMaskBg);
         opacity: 0;
+        z-index: 9;
 
         &.active {
             top: 0;
@@ -149,14 +133,12 @@ ul {
 
         li {
             width: 50%;
+            font-family: PingFangSC-Medium;
             font-size: 20px;
-            font-weight: bold;
             line-height: 10vh;
             margin: 0 auto;
 
-            &:hover,
             &.active {
-                color: var(--textNormal);
                 background: none;
             }
         }

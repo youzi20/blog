@@ -1,28 +1,24 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+import { render } from 'react-dom';
+
 import styled from 'styled-components';
 
-import { Container } from '../../components';
-import { UserInfo, Sidebar, ContentList, UserMessage, Menus, Footer } from '../../module';
+import { MainContainer } from '@/components';
+import { Header, ContentList, UserMessages, Footer } from '@/module';
 
+import { MenuTypes } from '@/types';
 
-import { MenuTypes } from '../../types';
-
+const pathname = location.pathname.replace("/", "");
 
 const App = styled(({ className }) => {
-    const [menu, setMenu] = useState(MenuTypes.NEWS);
 
     return <div className={className}>
-        <UserInfo w={1080} />
-        <Sidebar />
-        <Menus value={menu} onChange={setMenu} />
+        <Header />
 
-        <Container w={780}>
+        <MainContainer w={780}>
+            {["", MenuTypes.NEWS, MenuTypes.NOTES].indexOf(pathname) > -1 && <ContentList menu={pathname} />}
+            {MenuTypes.MESSAGES === pathname && <UserMessages />}
 
-            {MenuTypes.MESSAGE === menu ?
-                <UserMessage /> :
-                <ContentList menu={menu} />
-            }
 
 
             {/* <div>
@@ -48,7 +44,7 @@ const App = styled(({ className }) => {
                     </div>
                 </div>
             </div> */}
-        </Container>
+        </MainContainer>
 
 
         <Footer />
@@ -152,4 +148,4 @@ const App = styled(({ className }) => {
 // }
 `;
 
-ReactDOM.render(<App />, document.getElementById("root"));
+render(<App />, document.getElementById("root"));

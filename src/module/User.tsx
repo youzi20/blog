@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from '../components/index';
+import { Icon } from '@/components';
 
 const userInfo = {
     youzi: {
