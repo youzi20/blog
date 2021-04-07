@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { render } from 'react-dom';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled  from 'styled-components';
 
 import { MainContainer, MD } from '@/components';
 import { Header, Footer, User, Timer, NewsInfo } from '@/module';
