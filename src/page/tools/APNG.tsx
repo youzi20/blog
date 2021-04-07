@@ -150,6 +150,10 @@ p {
         }
     }
 }
+
+@media screen and (max-width: 768px) { 
+    padding: 0 15px;
+}
 `;
 
 export default APNG;
