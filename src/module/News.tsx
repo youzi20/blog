@@ -70,16 +70,10 @@ export const News: React.FC<ContentListProps> = styled(({ className, item }) => 
         dataStatistics(type, action[type]);
     }
 
-    const handleView = (val) => {
-        setShow(val);
-        if (val) {
-            queryDataById();
-            dataStatistics("views");
-        }
-    }
-
     const handleShow = () => {
         setShow(true);
+        queryDataById();
+        dataStatistics("views");
         // setBodyStyle({ maxHeight: "initial" });
     }
 

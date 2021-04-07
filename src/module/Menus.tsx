@@ -61,9 +61,7 @@ ul {
 
 @media screen and (max-width: 768px) { 
     .youzi-menu-btn {
-        position: fixed;
-        top: 15px;
-        right: 20px;
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;

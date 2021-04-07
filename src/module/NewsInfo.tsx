@@ -68,7 +68,6 @@ export const NewsInfo = styled(({ className, id, total, userAction, ...other }) 
         </ul>
     </div>
 })`
-
 position: fixed;
 top: 189px;
 left: 50%;
@@ -101,10 +100,10 @@ li {
         }
     
         &.active {
-            color: var(--highLightIcon);
+            color: var(--newsActionText);
     
             span {
-                background-color: var(--highLightIcon);
+                background-color: var(--newsActionText);
             }
         }
     }
@@ -136,10 +135,7 @@ li {
 }
 
 @media screen and (max-width: 768px) {
-    display: none;
+    top: inherit;
+    bottom: 20px;
 }
-
-
-
-
 `;

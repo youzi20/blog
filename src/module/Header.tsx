@@ -62,7 +62,7 @@ cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {  
-    margin-right: 50px;
+    margin-right: 10px;
 }
 
 `;
@@ -94,13 +94,18 @@ export const Header = styled(({ className, w, action }) => {
     </div> : null
 })`
 position: fixed;
-top: 0;
-left: 0;
+top: 0px;
+left: 0px;
 width: 100%;
-padding: 15px 0;
+height: 70px;
 background: var(--headerBg);
 box-shadow: var(--boxShadow);
 z-index: 9999;
+overflow: hidden;
+
+.youzi-container {
+    padding: 15px 0px;
+}
 
 .user-info {
     display: flex;
@@ -126,6 +131,12 @@ z-index: 9999;
 }
 
 @media screen and (max-width: 768px) { 
-    padding: 15px;
+    .youzi-container {
+        padding: 15px;
+    }
+
+    .youzi-flex-rt {
+        flex-direction: row-reverse;
+    }
 }
 `

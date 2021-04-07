@@ -9,31 +9,23 @@ import { Header, Footer, User, Timer, NewsInfo } from '@/module';
 const dataSource = window.__global_data__;
 const { id, title, contentHTML, createTimer, updateTimer, total, userAction } = dataSource || {};
 
-const GlobalStyle = createGlobalStyle`
-.youzi-user-info .user-info {
-    position: relative;
-    top: -70px;
-}
-`
 
-const StickyTitle = styled((props) => {
-    return <div {...props}><GlobalStyle /> {title}</div>
-})`
-font-weight: bold;
-font-size: 18px;
-color: var(--textNormal);
-position: fixed;
-top: 50px;
-left: 0;
-width: 100%;
-line-height: 20px;
-text-align: center;
-opacity: 0;
-padding: 0 15px;
-overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;
-animation: stickyTitleAnimate .3s ease forwards;
+const HeaderAnimate = styled.div`
+.youzi-container,
+.sticky-title {
+    position: relative;
+    top: ${({ sticky }) => sticky ? "-70px" : 0};
+    transition: all .3s ease;
+}
+
+.sticky-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--textNormal);
+    text-align: center;
+    line-height: 20px;
+    padding: 25px 0;
+}
 `;
 
 const App = styled(({ className }) => {
@@ -41,7 +33,7 @@ const App = styled(({ className }) => {
     const titleRef = useRef(null);
 
     const handleScroll = () => {
-        setSticky(document.documentElement.scrollTop > titleRef.current.offsetTop + titleRef.current.clientHeight);
+        setSticky(document.documentElement.scrollTop > titleRef.current.offsetTop + titleRef.current.clientHeight - 70);
     }
 
     useEffect(() => {
@@ -50,7 +42,9 @@ const App = styled(({ className }) => {
     }, []);
 
     return <div className={className}>
-        <Header action={sticky ? <StickyTitle /> : ""} />
+        <HeaderAnimate sticky={sticky}>
+            <Header action={<div className="sticky-title">{title}</div>} />
+        </HeaderAnimate>
         <NewsInfo {...{ id, total, userAction }} />
         <MainContainer w={780}>
             <div className="news-content">
